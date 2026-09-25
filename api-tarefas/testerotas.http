@@ -1,0 +1,26 @@
+GET 
+a resposta é "api de tarefas rodando"
+GET http://localhost:3000/
+
+GET de tarefas
+ gera a resposta das 3 tarefas 
+GET http://localhost:3000/tarefas
+
+GET /tarefas com filtro
+da o array [{ "id": 2, "titulo": "correr", "concluida": true }]
+GET http://localhost:3000/tarefas?concluida=true
+
+GET /tarefas/:id
+da o array cujo o id é 1 { "id": 1, "titulo": "estudar", "concluida": false }
+GET http://localhost:3000/tarefas/1
+
+GET /tarefas quando o id nao é real
+da o 404 gerando a mensagem: { "erro": "sem tarefa" }
+GET http://localhost:3000/tarefas/99
+
+POST /tarefas
+corpo: { "titulo": "Nova tarefa" }
+da um 201 que é o codigo de sucesso para um post: { "id": 4, "titulo": "Nova tarefa", "concluida": false }
+POST http://localhost:3000/tarefas
+Content-Type: application/json
+
