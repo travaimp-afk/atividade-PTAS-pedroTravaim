@@ -12,5 +12,13 @@ let tarefas = [
 app.get('/tarefas', (req, res) => {
   res.json(tarefas)});
 
+app.get('/tarefas/:id', (req, res) => {
+const tarefa = tarefas.find(t => t.id === Number(req.params.id));
+
+if (!tarefa) {
+return res.status(404).json({ erro: 'nao encontra tarefa' });}
+
+res.json(tarefa);});
+
 app.listen(3000, () => {
   console.log('roda na 3000');});
