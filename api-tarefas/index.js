@@ -9,14 +9,14 @@ let tarefas = [
 {id:2, titulo: 'correr',concluida: true },
 {id:3, titulo: 'almoçar',concluida: false }];
 
-app.get('/tarefas', (req, res) => {
+app.get('/tarefas', (req, res) => {  
   res.json(tarefas)});
 
 app.get('/tarefas/:id', (req, res) => {
 const tarefa = tarefas.find(t => t.id === Number(req.params.id));
 
 if (!tarefa) {
-return res.status(404).json({ erro: 'nao encontra tarefa' });}
+return res.status(404).json({ erro: 'sem tarefa'});}
 
 res.json(tarefa);});
 
