@@ -2,6 +2,20 @@ import express from 'express';
 const app = express();
 app.use(express.json());
 
+function autenticar(req, res, next) {
+if (req.headers.authorization !== '123senha') {
+return res.status(401).json({ erro:'sem permissao'});}
+next();}
+
+function validarTitulo(req, res, next) {
+if (!req.body.titulo) {
+return res.status(400).json({erro:'sem titulo'});}
+next();}
+
+function logger(req, res, next) {
+console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+next();}
+
 app.get('/', (req, res) => {
 res.send('api de tarefas rodando');});
 
@@ -24,7 +38,7 @@ if (!tarefa) {
 return res.status(404).json({erro: 'sem tarefa'});}
 res.json(tarefa);});
 
-app.post('/tarefas', (req, res) => {
+app.post('/tarefas', [autenticar, validarTitulo, logger], (req, res) => {
 const { titulo } = req.body;
 
 const novaTarefa = {
